@@ -38,6 +38,25 @@ header {
 }
 
 
+/* FORMULAIRE INSCRIPTION */
+
+.form_inscription {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#submit_btn {
+    margin-top: 10px;
+}
+
 /* TEXTE */
 
 p {
@@ -55,7 +74,8 @@ h1 {
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20%;
+    margin-top: 10%;
+    margin-bottom: 10px;
     color: #FC7A57;
 }
 
@@ -85,5 +105,8 @@ h1 {
     }
     h1 {
         font-size: 16px;
+    }
+    input {
+        width: 50%;
     }
 }
