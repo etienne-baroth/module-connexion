@@ -11,13 +11,13 @@
 
 <header>
 <div class="head_nav">
-    <div class="head_logo">
+    <a href="index.php"><div class="head_logo">
         <img class="logo" src="style/img/logo.png" alt ="logo voyage désert">
-    </div>
+    </div></a>
     <div class="head_btn">
-        <p><a href="index.php">Accueil</a></p>
         <p><a href="connexion.php">Se connecter</a></p>
-        <p><a href="inscription.php">Créer nouveau compte</a></p>
+        <p><a href="inscription.php">Nouveau compte</a></p>
+        <p><a href="profil.php">Modifier profil</a></p>
     </div>
 </div>
 </header>
@@ -26,13 +26,13 @@
 
 <h1>Formulaire d'inscription</h1>
 
-<form class="form_inscription" method="post" action="connexion.php">
-    <input type="text" name="prenom" placeholder="Login">
+<form class="form" method="post" action="connexion.php">
+    <input type="text" name="login" placeholder="Login">
     <input type="text" name="prenom" placeholder="Prénom">
-    <input type="text" name="prenom" placeholder="Nom">
-    <input type="text" name="prenom" placeholder="Mot de passe">
-    <input type="text" name="prenom" placeholder="Confirmation mot de passe">
-    <input id="submit_btn" type="submit" name="submit" value="Validation" href="connexion.php">
+    <input type="text" name="nom" placeholder="Nom">
+    <input type="text" name="mdp" placeholder="Mot de passe">
+    <input type="text" name="mdpconf" placeholder="Confirmation mot de passe">
+    <input id="submit_btn" type="submit" name="submit" value="Validation">
 </form>
 
 </main>
