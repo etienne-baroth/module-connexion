@@ -1,3 +1,42 @@
+<?php
+
+$error = "";
+
+try {
+    $database = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root', '');
+}
+
+catch (Exception $e) {
+    die('Erreur: '. $e->getMessage());
+}
+
+if(isset($_POST['submit'])) {
+
+    if(!empty($_POST['login']) && !empty($_POST['prenom']) && !empty($_POST['nom']) && !empty($_POST['mdp']) && !empty($_POST['mdpconf'])) {
+
+        if($_POST['mdp'] == $_POST['mdpconf']) {
+
+            $login = htmlspecialchars($_POST['login']);
+            $prenom = htmlspecialchars($_POST['prenom']);
+            $nom = htmlspecialchars($_POST['nom']);
+            $mdp = sha1($_POST['mdp']);
+
+            $request = $database->prepare('INSERT INTO utilisateurs (login, prenom, nom, password) VALUES (?,?,?,?)');
+
+            if($request->execute(array($login, $prenom, $nom, $mdp))) {
+
+                header('Location: connexion.php');
+            }
+        }
+    }
+    else {
+        
+        $error = "Veuillez remplir tous les champs";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,14 +65,18 @@
 
 <h1>Formulaire d'inscription</h1>
 
-<form class="form" method="post" action="connexion.php">
-    <input type="text" name="login" placeholder="Login">
-    <input type="text" name="prenom" placeholder="Prénom">
-    <input type="text" name="nom" placeholder="Nom">
-    <input type="text" name="mdp" placeholder="Mot de passe">
-    <input type="text" name="mdpconf" placeholder="Confirmation mot de passe">
+<form class="form" method="post" action="">
+    <input type="text" name="login" placeholder="Login" autocomplete="off">
+    <input type="text" name="prenom" placeholder="Prénom" autocomplete="off">
+    <input type="text" name="nom" placeholder="Nom" autocomplete="off">
+    <input type="password" name="mdp" placeholder="Mot de passe" autocomplete="off">
+    <input type="password" name="mdpconf" placeholder="Confirmation mot de passe" autocomplete="off">
     <input id="submit_btn" type="submit" name="submit" value="Validation">
 </form>
+
+<div class="error">
+<?php echo $error; ?>
+</div>
 
 </main>
 

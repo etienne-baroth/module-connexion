@@ -34,8 +34,8 @@
     <input type="text" name="newlogin" placeholder="Nouveau login">
     <input type="text" name="newprenom" placeholder="Nouveau prénom">
     <input type="text" name="newnom" placeholder="Nouveau nom">
-    <input type="text" name="newmdp" placeholder=" Nouveau mot de passe">
-    <input type="text" name="newmdpconf" placeholder="Confirmation nouveau mot de passe">
+    <input type="password" name="newmdp" placeholder=" Nouveau mot de passe">
+    <input type="password" name="newmdpconf" placeholder="Confirmation nouveau mot de passe">
     <input id="submit_btn" type="submit" name="submit" value="Validation">
 </form>
 

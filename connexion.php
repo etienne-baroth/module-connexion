@@ -1,3 +1,32 @@
+<?php
+
+session_start();
+
+$database = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root', '');
+
+if(isset($_POST['submit'])) {
+
+    if(!empty($_POST['login']) && !empty($_POST['mdp'])) {
+
+        $login = htmlspecialchars($_POST['login']);
+        $mdp = sha1($_POST['mdp']);
+
+        $getUser = $database->prepare("SELECT* FROM utilisateurs WHERE login = ? AND password = ?");
+        $getUser->execute(array($login, $mdp));
+
+        if($getUser->rowCount() > 0) {
+            $_SESSION['login'] = $login;
+            $_SESSION['mdp'] = $mdp;
+        }
+        header('Location: index.php');
+    }
+    else {
+        echo "Votre mot de passe ou pseudo est incorrect";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,9 +55,9 @@
 
 <h1>Connexion</h1>
 
-<form class="form" method="post" action="index.php">
-    <input type="text" name="login" placeholder="Login">
-    <input type="text" name="password" placeholder="Mot de passe">
+<form class="form" method="post" action="">
+    <input type="text" name="login" placeholder="Login" autocomplete="off">
+    <input type="password" name="mdp" placeholder="Mot de passe" autocomplete="off">
     <input id="submit_btn" type="submit" name="submit" value="Validation">
 </form>
 
