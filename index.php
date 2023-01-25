@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,7 +23,6 @@
     <div class="head_btn">
         <p><a href="connexion.php">Se connecter</a></p>
         <p><a href="inscription.php">Nouveau compte</a></p>
-        <p><a href="profil.php">Modifier profil</a></p>
     </div>
 </div>
 </header>

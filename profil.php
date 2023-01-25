@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,9 +21,7 @@
         <img class="logo" src="style/img/logo.png" alt ="logo voyage désert">
     </div></a>
     <div class="head_btn">
-        <p><a href="connexion.php">Se connecter</a></p>
-        <p><a href="inscription.php">Nouveau compte</a></p>
-        <p><a href="profil.php">Modifier profil</a></p>
+        <p><a href="logout.php">Déconnexion</a></p>
     </div>
 </div>
 </header>
@@ -26,14 +30,10 @@
 
 <h1>Modifier son profil</h1>
 
-<table>
-    <p style=" text-align: center;">Infos sur la personne connectée à mettre ici dans un tableau ???</p>
-</table>
-
-<form class="form" method="post" action="connexion.php">
-    <input type="text" name="newlogin" placeholder="Nouveau login">
-    <input type="text" name="newprenom" placeholder="Nouveau prénom">
-    <input type="text" name="newnom" placeholder="Nouveau nom">
+<form class="form" method="post" action="">
+    <input type="text" name="newlogin" placeholder=<?php echo $_SESSION["utilisateur"]["login"]; ?>>
+    <input type="text" name="newprenom" placeholder=<?php echo $_SESSION["utilisateur"]["prenom"]; ?>>
+    <input type="text" name="newnom" placeholder=<?php echo $_SESSION["utilisateur"]["nom"]; ?>>
     <input type="password" name="newmdp" placeholder=" Nouveau mot de passe">
     <input type="password" name="newmdpconf" placeholder="Confirmation nouveau mot de passe">
     <input id="submit_btn" type="submit" name="submit" value="Validation">

@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 $database = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root', '');
 
 if(isset($_POST['submit'])) {
@@ -11,17 +9,63 @@ if(isset($_POST['submit'])) {
         $login = htmlspecialchars($_POST['login']);
         $mdp = sha1($_POST['mdp']);
 
-        $getUser = $database->prepare("SELECT* FROM utilisateurs WHERE login = ? AND password = ?");
-        $getUser->execute(array($login, $mdp));
+        $getUser = $database->prepare("SELECT* FROM utilisateurs WHERE login = :login AND password = :password");
 
-        if($getUser->rowCount() > 0) {
-            $_SESSION['login'] = $login;
-            $_SESSION['mdp'] = $mdp;
+        $getUser->bindValue(":login", $login);
+        $getUser->bindValue(":password", $mdp);
+
+        $getUser->execute();
+
+        $user = $getUser->fetch();
+
+        if(!$user) {
+            die("L\'utilisateur et/ou le mot de passe est incorrect");
         }
-        header('Location: index.php');
+
+        session_start();
+
+        $_SESSION["utilisateur"] = [
+            "login" => $user["login"],
+            "prenom" => $user["prenom"],
+            "nom" => $user["nom"]
+        ];
+
+        header('Location: profil.php');
+
+    }
+    elseif(empty($_POST['login']) && !empty($_POST['mdp'])) {
+        echo "Veuillez saisir votre login";
+    }
+    elseif(empty($_POST['mdp']) && !empty($_POST['login'])) {
+        echo "Veuillez saisir votre mot de passe";
     }
     else {
-        echo "Votre mot de passe ou pseudo est incorrect";
+        echo "Veuillez saisir votre login et mot de passe";
+    }
+
+    if($_POST['login']=="admin" && $_POST['mdp']=="admin") {
+        $login = htmlspecialchars($_POST['login']);
+        $mdp = sha1($_POST['mdp']);
+
+        $getUser = $database->prepare("SELECT* FROM utilisateurs WHERE login = :login AND password = :password");
+
+        $getUser->bindValue(":login", $login);
+        $getUser->bindValue(":password", $mdp);
+
+        $getUser->execute();
+
+        $user = $getUser->fetch();
+
+        session_start();
+
+        $_SESSION["utilisateur"] = [
+            "login" => $user["login"],
+            "prenom" => $user["prenom"],
+            "nom" => $user["nom"]
+        ];
+
+        header('Location: admin.php');
+
     }
 }
 
@@ -44,9 +88,7 @@ if(isset($_POST['submit'])) {
         <img class="logo" src="style/img/logo.png" alt ="logo voyage désert">
     </div></a>
     <div class="head_btn">
-        <p><a href="connexion.php">Se connecter</a></p>
         <p><a href="inscription.php">Nouveau compte</a></p>
-        <p><a href="profil.php">Modifier profil</a></p>
     </div>
 </div>
 </header>

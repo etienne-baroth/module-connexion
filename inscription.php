@@ -30,7 +30,6 @@ if(isset($_POST['submit'])) {
         }
     }
     else {
-        
         $error = "Veuillez remplir tous les champs";
     }
 }
@@ -55,8 +54,6 @@ if(isset($_POST['submit'])) {
     </div></a>
     <div class="head_btn">
         <p><a href="connexion.php">Se connecter</a></p>
-        <p><a href="inscription.php">Nouveau compte</a></p>
-        <p><a href="profil.php">Modifier profil</a></p>
     </div>
 </div>
 </header>

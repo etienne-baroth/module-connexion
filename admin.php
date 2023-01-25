@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,16 +22,53 @@
         <img class="logo" src="style/img/logo.png" alt ="logo voyage désert">
     </div></a>
     <div class="head_btn">
-        <p><a href="connexion.php">Se connecter</a></p>
-        <p><a href="inscription.php">Nouveau compte</a></p>
         <p><a href="profil.php">Modifier profil</a></p>
+        <p><a href="logout.php">Déconnexion</a></p>
     </div>
 </div>
 </header>
 
 <main>
 
-<h1>Page d'administration</h1>
+<?php
+$admin = $_SESSION["utilisateur"]["login"];
+?>
+
+<h1><?php echo "Bienvenue sur votre page d'$admin";?></h1>
+
+<?php
+
+$database = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root', '');
+
+$table= $database->query('SELECT* FROM utilisateurs');
+$tableUsers = $table->fetchAll();
+
+?>
+
+<?php
+
+foreach($tableUsers as $tableUser): ?>
+
+<div class="adminTable">
+<table>
+
+    <tr>
+        <th>Login</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Password</th>
+    </tr>
+    <tr>
+        <td><?php echo $tableUser["login"]; ?></td>
+        <td><?php echo $tableUser["prenom"]; ?></td>
+        <td><?php echo $tableUser["nom"]; ?></td>
+        <td><?php echo $tableUser["password"]; ?></td>
+    </tr>
+
+</table>
+</div>
+
+<?php endforeach; ?>
 
 </main>
 
