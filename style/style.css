@@ -58,8 +58,6 @@ input {
 }
 
 .error {
-    display: flex;
-    align-items: center;
     text-align: center;
     color: #FC7A57;
 }
@@ -89,6 +87,21 @@ h1 {
 
 
 /* ADMIN */
+
+.adminTable {
+    display: flex;
+    justify-content: center;
+}
+
+th {
+    border: 2px solid #FC7A57;
+    text-align: center;
+}
+
+td {
+    border: 2px solid #FC7A57;
+    text-align: center;
+}
 
 
 /* RESPONSIVE */

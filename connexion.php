@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 $database = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root', '');
 
 if(isset($_POST['submit'])) {
@@ -19,18 +20,18 @@ if(isset($_POST['submit'])) {
         $user = $getUser->fetch();
 
         if(!$user) {
-            die("L\'utilisateur et/ou le mot de passe est incorrect");
+            die("L'utilisateur et/ou le mot de passe est incorrect");
         }
 
-        session_start();
-
         $_SESSION["utilisateur"] = [
+            "id" => $user["id"],
             "login" => $user["login"],
             "prenom" => $user["prenom"],
             "nom" => $user["nom"]
         ];
 
         header('Location: profil.php');
+        // var_dump($_SESSION);
 
     }
     elseif(empty($_POST['login']) && !empty($_POST['mdp'])) {
@@ -56,15 +57,16 @@ if(isset($_POST['submit'])) {
 
         $user = $getUser->fetch();
 
-        session_start();
 
         $_SESSION["utilisateur"] = [
+            "id" => $user["id"],
             "login" => $user["login"],
             "prenom" => $user["prenom"],
             "nom" => $user["nom"]
         ];
 
         header('Location: admin.php');
+        // var_dump($_SESSION);
 
     }
 }

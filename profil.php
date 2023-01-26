@@ -2,6 +2,35 @@
 
 session_start();
 
+$database = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root', '');
+
+$getUser = $database->prepare('SELECT* FROM utilisateurs');
+
+$getUser->execute();
+
+$user = $getUser->fetch();
+
+if(isset($_POST["submit"])) {
+
+    $newmdp = sha1($_POST['newmdp']);
+    $newlogin = htmlspecialchars($_POST['newlogin']);
+    $newprenom = htmlspecialchars($_POST['newprenom']);
+    $newnom = htmlspecialchars($_POST['newnom']);
+
+    if(!empty($newmdp) && !empty($newlogin) && !empty($newprenom) && !empty($newnom)) {
+
+        $userId = $_SESSION["utilisateur"]["id"];
+        $getUser = $database->prepare("UPDATE utilisateurs SET `login` = '$newlogin', `prenom` = '$newprenom', `nom` = '$newnom', `password` = '$newmdp' WHERE `id`='$userId'");
+
+        $getUser->execute();
+
+        echo "Les modifications sont enregistrées";
+
+    } else {
+        echo "Toutes les informations sont nécessaires";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,14 +59,15 @@ session_start();
 
 <h1>Modifier son profil</h1>
 
+<div class="modif">
 <form class="form" method="post" action="">
-    <input type="text" name="newlogin" placeholder=<?php echo $_SESSION["utilisateur"]["login"]; ?>>
-    <input type="text" name="newprenom" placeholder=<?php echo $_SESSION["utilisateur"]["prenom"]; ?>>
-    <input type="text" name="newnom" placeholder=<?php echo $_SESSION["utilisateur"]["nom"]; ?>>
-    <input type="password" name="newmdp" placeholder=" Nouveau mot de passe">
-    <input type="password" name="newmdpconf" placeholder="Confirmation nouveau mot de passe">
-    <input id="submit_btn" type="submit" name="submit" value="Validation">
+    <input type="text" name="newlogin" value=""placeholder="Nouveau Login" autocomplete="off">
+    <input type="text" name="newprenom" placeholder="Nouveau Prénom" autocomplete="off">
+    <input type="text" name="newnom" placeholder="Nouveau Nom" autocomplete="off">
+    <input type="password" name="newmdp" placeholder="Nouveau mot de passe" autocomplete="off">
+    <input id="submit_btn" type="submit" name="submit" value="Modifier">
 </form>
+</div>
 
 </main>
 
