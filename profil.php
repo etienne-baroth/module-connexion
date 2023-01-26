@@ -10,6 +10,7 @@ $getUser->execute();
 
 $user = $getUser->fetch();
 
+
 if(isset($_POST["submit"])) {
 
     $newmdp = sha1($_POST['newmdp']);
@@ -17,7 +18,7 @@ if(isset($_POST["submit"])) {
     $newprenom = htmlspecialchars($_POST['newprenom']);
     $newnom = htmlspecialchars($_POST['newnom']);
 
-    if(!empty($newmdp) && !empty($newlogin) && !empty($newprenom) && !empty($newnom)) {
+    if(!empty($newlogin) && !empty($newprenom) && !empty($newnom) && !empty($newmdp)) {
 
         $userId = $_SESSION["utilisateur"]["id"];
         $getUser = $database->prepare("UPDATE utilisateurs SET `login` = '$newlogin', `prenom` = '$newprenom', `nom` = '$newnom', `password` = '$newmdp' WHERE `id`='$userId'");
