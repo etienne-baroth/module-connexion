@@ -19,7 +19,9 @@ if(isset($_POST["submit"])) {
     if(!empty($newlogin) && !empty($newprenom) && !empty($newnom) && !empty($newmdp)) {
 
         $userId = $_SESSION["utilisateur"]["id"];
-        $getUser = $database->prepare("UPDATE utilisateurs SET `login` = '$newlogin', `prenom` = '$newprenom', `nom` = '$newnom', `password` = '$newmdp' WHERE `id`='$userId'");
+        $getUser = $database->prepare("UPDATE utilisateurs SET `login` = '$newlogin', `prenom` = '$newprenom', `nom` = '$newnom', `password` = :password WHERE `id`='$userId'");
+
+        $getUser->bindValue(":password", $newmdp);
 
         $getUser->execute();
 
