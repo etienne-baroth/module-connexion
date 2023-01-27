@@ -1,14 +1,9 @@
 <?php
 
+require_once('config.php');
+
 $error = "";
 
-try {
-    $database = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root', '');
-}
-
-catch (Exception $e) {
-    die('Erreur: '. $e->getMessage());
-}
 
 if(isset($_POST['submit'])) {
 

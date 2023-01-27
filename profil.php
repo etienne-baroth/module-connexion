@@ -1,8 +1,6 @@
 <?php
 
-session_start();
-
-$database = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root', '');
+require_once('config.php');
 
 $getUser = $database->prepare('SELECT* FROM utilisateurs');
 
