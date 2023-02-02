@@ -2,6 +2,8 @@
 
 require_once('config.php');
 
+$error="";
+
 if(isset($_POST['submit'])) {
 
     if(!empty($_POST['login']) && !empty($_POST['mdp'])) {
@@ -19,7 +21,7 @@ if(isset($_POST['submit'])) {
         $user = $getUser->fetch();
 
         if(!$user) {
-            die("L'utilisateur et/ou le mot de passe est incorrect");
+            die($error = "Votre login et/ou mot de passe est incorrect");
         }
 
         $_SESSION["utilisateur"] = [
@@ -34,13 +36,13 @@ if(isset($_POST['submit'])) {
 
     }
     elseif(empty($_POST['login']) && !empty($_POST['mdp'])) {
-        echo "Veuillez saisir votre login";
+        $error = "Veuillez saisir votre login";
     }
     elseif(empty($_POST['mdp']) && !empty($_POST['login'])) {
-        echo "Veuillez saisir votre mot de passe";
+        $error = "Veuillez saisir votre mot de passe";
     }
     else {
-        echo "Veuillez saisir votre login et mot de passe";
+        $error = "Veuillez saisir votre login et mot de passe";
     }
 
     if($_POST['login']=="admin" && $_POST['mdp']=="admin") {
@@ -103,6 +105,10 @@ if(isset($_POST['submit'])) {
     <input type="password" name="mdp" placeholder="Mot de passe" autocomplete="off">
     <input id="submit_btn" type="submit" name="submit" value="Validation">
 </form>
+
+<div class="error">
+<?php echo $error; ?>
+</div>
 
 </main>
 
