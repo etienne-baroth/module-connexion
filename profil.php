@@ -58,7 +58,7 @@ if(isset($_POST["submit"])) {
 
 <main>
 
-<h1 id="TitreProfil">Envie de modifier votre login <?php echo $_SESSION["utilisateur"]["login"] ?> ? Vous pouvez le faire ici en même temps que votre mot de passe</h1>
+<h1 id="TitreProfil">Envie de modifier vos informations <?php echo $_SESSION["utilisateur"]["login"] ?> ? Vous pouvez le faire ici</h1>
 
 <div class="modif">
 <form class="form" method="post" action="">
