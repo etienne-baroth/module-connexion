@@ -62,9 +62,9 @@ if(isset($_POST["submit"])) {
 
 <div class="modif">
 <form class="form" method="post" action="">
-    <input type="text" name="newlogin" value="<?php echo $_SESSION["utilisateur"]["login"] ?>" autocomplete="off">
-    <input type="text" name="newprenom" value="<?php echo $_SESSION["utilisateur"]["prenom"] ?>" autocomplete="off">
-    <input type="text" name="newnom" value="<?php echo $_SESSION["utilisateur"]["nom"] ?>" autocomplete="off">
+    <input type="text" name="newlogin" placeholder="Nouveau Login" autocomplete="off">
+    <input type="text" name="newprenom" placeholder="Nouveau Prénom" autocomplete="off">
+    <input type="text" name="newnom" placeholder="Nouveau Nom" autocomplete="off">
     <input type="password" name="newmdp" placeholder="Nouveau mot de passe" autocomplete="off">
     <input id="submit_btn" type="submit" name="submit" value="Modifier">
 </form>
