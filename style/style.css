@@ -85,6 +85,18 @@ h1 {
     color: #FC7A57;
 }
 
+/* MODIFICATION PROFIL */
+
+label {
+    text-align: center;
+    margin-top: 5px;
+    color: #FC7A57;
+}
+
+#TitreProfil {
+    font-size: 24px;
+}
+
 /* ADMIN */
 
 .adminTable {

@@ -58,14 +58,18 @@ if(isset($_POST["submit"])) {
 
 <main>
 
-<h1>Modifier son profil</h1>
+<h1 id="TitreProfil">Envie de modifier votre login <?php echo $_SESSION["utilisateur"]["login"] ?> ? Vous pouvez le faire ici en même temps que votre mot de passe</h1>
 
 <div class="modif">
 <form class="form" method="post" action="">
-    <input type="text" name="newlogin" placeholder="Nouveau Login" autocomplete="off">
-    <input type="text" name="newprenom" placeholder="Nouveau Prénom" autocomplete="off">
-    <input type="text" name="newnom" placeholder="Nouveau Nom" autocomplete="off">
-    <input type="password" name="newmdp" placeholder="Nouveau mot de passe" autocomplete="off">
+    <label for="Nouveau Login">Nouveau Login</label>
+    <input type="text" name="newlogin" autocomplete="off">
+    <label for="Nouveau Prénom">Nouveau Prénom</label>
+    <input type="text" name="newprenom" autocomplete="off">
+    <label for="Nouveau Nom">Nouveau Nom</label>
+    <input type="text" name="newnom" autocomplete="off">
+    <label for="Nouveau Mot de Passe">Nouveau Mot de Passe</label>
+    <input type="password" name="newmdp" autocomplete="off">
     <input id="submit_btn" type="submit" name="submit" value="Modifier">
 </form>
 </div>
